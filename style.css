@@ -1,0 +1,769 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #05070b;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    touch-action: none;
+}
+
+
+/* =========================
+   GAME
+========================= */
+
+#game {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            #07152d 0%,
+            #173d58 45%,
+            #28513a 70%,
+            #0b2114 100%
+        );
+}
+
+
+/* =========================
+   CANVAS
+========================= */
+
+#canvas {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 5;
+}
+
+
+/* =========================
+   HUD
+========================= */
+
+#hud {
+    position: absolute;
+
+    left: 10px;
+    top: 10px;
+
+    width: 220px;
+
+    padding: 12px;
+
+    z-index: 50;
+
+    color: white;
+
+    background:
+        rgba(5, 10, 18, .88);
+
+    border:
+        2px solid #e0b63b;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.5);
+}
+
+.hud-title {
+    color: #ffd84a;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+.stat {
+    font-size: 12px;
+
+    margin: 3px 0;
+}
+
+.hud-line {
+    font-size: 12px;
+
+    margin-top: 5px;
+}
+
+.bar {
+    height: 10px;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background: #111;
+
+    border-radius: 10px;
+
+    border: 1px solid #777;
+}
+
+#hpBar {
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #b50000,
+            #ff2424
+        );
+
+    transition: width .2s;
+}
+
+#xpBar {
+    width: 0%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #008cff,
+            #00eaff
+        );
+
+    transition: width .2s;
+}
+
+
+/* =========================
+   ZONE
+========================= */
+
+#zoneName {
+    position: absolute;
+
+    top: 14px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 40;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(0,0,0,.45);
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message {
+    position: absolute;
+
+    left: 50%;
+    top: 25%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 100;
+
+    color: #ffd83d;
+
+    font-size: 27px;
+
+    font-weight: bold;
+
+    text-shadow:
+        3px 3px 0 #000;
+
+    pointer-events: none;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   BOSS
+========================= */
+
+#bossBar {
+    display: none;
+
+    position: absolute;
+
+    top: 65px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 420px;
+    max-width: 80%;
+
+    z-index: 60;
+}
+
+#bossName {
+    color: #ffb300;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+
+    text-shadow:
+        2px 2px #000;
+}
+
+.boss-health {
+    width: 100%;
+    height: 15px;
+
+    background: #111;
+
+    border:
+        2px solid #fff;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+#bossHp {
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #700000,
+            #ff0000,
+            #ff6b00
+        );
+}
+
+
+/* =========================
+   MOBILE CONTROLS
+========================= */
+
+#leftControls,
+#rightControls {
+    position: absolute;
+
+    bottom: 78px;
+
+    z-index: 80;
+
+    display: flex;
+
+    gap: 8px;
+}
+
+#leftControls {
+    left: 10px;
+}
+
+#rightControls {
+    right: 10px;
+}
+
+#leftControls button,
+#rightControls button {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    border:
+        2px solid #dbe7f2;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #62748b,
+            #1c2633
+        );
+
+    font-size: 22px;
+
+    box-shadow:
+        0 5px 10px rgba(0,0,0,.5);
+}
+
+#leftControls button:active,
+#rightControls button:active {
+    transform: scale(.88);
+
+    background: #536b85;
+}
+
+
+/* =========================
+   BOTTOM BAR
+========================= */
+
+#bottomBar {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 65px;
+
+    z-index: 90;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 15px;
+
+    background:
+        rgba(3,5,9,.95);
+
+    border-top:
+        2px solid #30353d;
+}
+
+#creator {
+    color: #ffd43b;
+
+    font-size: 12px;
+}
+
+.bottom-buttons {
+    display: flex;
+
+    gap: 7px;
+}
+
+button {
+    cursor: pointer;
+
+    color: white;
+
+    font-weight: bold;
+
+    border:
+        2px solid #e9cf70;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            #dba92c,
+            #81540e
+        );
+
+    padding:
+        8px 12px;
+}
+
+button:active {
+    transform: scale(.92);
+}
+
+
+/* =========================
+   SHOP
+========================= */
+
+#shop {
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 200;
+
+    background:
+        rgba(0,0,0,.72);
+}
+
+.shop-window {
+    position: absolute;
+
+    width: 500px;
+    max-width: 94%;
+
+    max-height: 90%;
+
+    overflow-y: auto;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    padding: 20px;
+
+    border:
+        3px solid #e3b63d;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b2a40,
+            #080d15
+        );
+
+    box-shadow:
+        0 20px 70px #000;
+}
+
+.shop-window h1 {
+    text-align: center;
+
+    color: #ffd447;
+
+    margin-bottom: 4px;
+}
+
+.shop-coins {
+    text-align: center;
+
+    color: white;
+
+    margin-bottom: 15px;
+}
+
+.close-btn {
+    position: absolute;
+
+    top: 8px;
+    right: 8px;
+
+    width: 35px;
+    height: 35px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background: #8e1717;
+}
+
+
+/* =========================
+   TABS
+========================= */
+
+.tabs {
+    display: flex;
+
+    gap: 5px;
+
+    margin-bottom: 12px;
+}
+
+.tab {
+    flex: 1;
+
+    padding: 9px 4px;
+
+    font-size: 11px;
+
+    background: #26364c;
+
+    border-color: #566b82;
+}
+
+.tab.active {
+    background:
+        linear-gradient(
+            #e4b735,
+            #8b5c10
+        );
+}
+
+
+/* =========================
+   SHOP CONTENT
+========================= */
+
+.shop-content {
+    display: none;
+}
+
+.shop-content.active {
+    display: block;
+}
+
+.shop-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 8px 0;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid #35465c;
+}
+
+.shop-item > div:nth-child(2),
+.shop-item > div:first-child:not(.skin-preview) {
+    flex: 1;
+}
+
+.shop-item small {
+    display: block;
+
+    color: #aebdce;
+
+    margin-top: 3px;
+}
+
+.shop-item button {
+    white-space: nowrap;
+}
+
+.skin-preview {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 34px;
+
+    border-radius: 10px;
+
+    background: #101722;
+}
+
+.skin-preview.red {
+    filter:
+        sepia(1)
+        saturate(8)
+        hue-rotate(320deg);
+}
+
+.skin-preview.blue {
+    filter:
+        sepia(1)
+        saturate(7)
+        hue-rotate(170deg);
+}
+
+.skin-preview.gold {
+    filter:
+        sepia(1)
+        saturate(8)
+        hue-rotate(5deg);
+}
+
+
+/* =========================
+   GAME OVER
+========================= */
+
+#gameOver {
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 500;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    text-align: center;
+
+    color: white;
+
+    background:
+        rgba(0,0,0,.88);
+}
+
+#gameOver h1 {
+    color: #ff3030;
+
+    margin-bottom: 10px;
+}
+
+#gameOver p {
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px) {
+
+    #hud {
+        width: 165px;
+
+        padding: 7px;
+    }
+
+    .hud-title {
+        font-size: 11px;
+    }
+
+    .stat,
+    .hud-line {
+        font-size: 9px;
+    }
+
+    #zoneName {
+        font-size: 10px;
+
+        top: 8px;
+    }
+
+    #leftControls,
+    #rightControls {
+        bottom: 72px;
+    }
+
+    #leftControls button,
+    #rightControls button {
+        width: 52px;
+        height: 52px;
+
+        font-size: 19px;
+    }
+
+    #creator {
+        font-size: 8px;
+    }
+
+    .bottom-buttons button {
+        padding: 7px;
+
+        font-size: 9px;
+    }
+
+    #message {
+        font-size: 20px;
+    }
+
+    #bossBar {
+        top: 55px;
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media(max-width:390px) {
+
+    #hud {
+        width: 145px;
+    }
+
+    #leftControls button,
+    #rightControls button {
+        width: 47px;
+        height: 47px;
+    }
+
+    #bottomBar {
+        padding: 0 6px;
+    }
+
+    #creator {
+        font-size: 7px;
+    }
+
+}
+
+
+/* =========================
+   LANDSCAPE
+========================= */
+
+@media(max-height:500px) {
+
+    #bottomBar {
+        height: 52px;
+    }
+
+    #leftControls,
+    #rightControls {
+        bottom: 58px;
+    }
+
+    #leftControls button,
+    #rightControls button {
+        width: 45px;
+        height: 45px;
+    }
+
+}
+

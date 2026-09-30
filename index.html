@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Stickman Monster Hunter</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="game">
+
+    <canvas id="canvas"></canvas>
+
+    <!-- HUD -->
+    <div id="hud">
+
+        <div class="hud-title">
+            🏹 STICKMAN HUNTER
+        </div>
+
+        <div class="stat">
+            ❤️ HP:
+            <span id="hpText">100</span>/<span id="maxHpText">100</span>
+        </div>
+
+        <div class="bar">
+            <div id="hpBar"></div>
+        </div>
+
+        <div class="stat">
+            ⭐ LEVEL:
+            <span id="levelText">1</span>
+        </div>
+
+        <div class="bar xp-bar">
+            <div id="xpBar"></div>
+        </div>
+
+        <div class="hud-line">
+            💰 <span id="coinsText">100</span>
+        </div>
+
+        <div class="hud-line">
+            🏹 Damage:
+            <span id="damageText">20</span>
+        </div>
+
+        <div class="hud-line">
+            👹 Dushman:
+            <span id="enemyText">0</span>
+        </div>
+
+    </div>
+
+
+    <!-- Zone -->
+    <div id="zoneName">
+        🌲 O‘RMON ZONASI
+    </div>
+
+
+    <!-- Message -->
+    <div id="message"></div>
+
+
+    <!-- Boss bar -->
+    <div id="bossBar">
+
+        <div id="bossName">
+            👑 BOSS
+        </div>
+
+        <div class="boss-health">
+            <div id="bossHp"></div>
+        </div>
+
+    </div>
+
+
+    <!-- Mobile controls -->
+
+    <div id="leftControls">
+
+        <button id="leftBtn">◀</button>
+        <button id="rightBtn">▶</button>
+
+    </div>
+
+
+    <div id="rightControls">
+
+        <button id="jumpBtn">⬆</button>
+        <button id="attackBtn">🏹</button>
+
+    </div>
+
+
+    <!-- Bottom -->
+    <div id="bottomBar">
+
+        <div id="creator">
+            Ishlab chiqaruvchi: <b>ULUG‘BEK.R</b>
+        </div>
+
+        <div class="bottom-buttons">
+
+            <button id="shopBtn">
+                🏪 MAGAZIN
+            </button>
+
+            <button id="pauseBtn">
+                ⏸
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SHOP -->
+
+    <div id="shop">
+
+        <div class="shop-window">
+
+            <button id="closeShop"
+                    class="close-btn">
+                ✕
+            </button>
+
+            <h1>🏪 MAGAZIN</h1>
+
+            <div class="shop-coins">
+                💰 <span id="shopCoins">100</span>
+            </div>
+
+
+            <!-- Tabs -->
+
+            <div class="tabs">
+
+                <button class="tab active"
+                        data-tab="skins">
+                    🎭 SKINLAR
+                </button>
+
+                <button class="tab"
+                        data-tab="zones">
+                    🌎 ZONALAR
+                </button>
+
+                <button class="tab"
+                        data-tab="items">
+                    ⚔️ BUYUMLAR
+                </button>
+
+            </div>
+
+
+            <!-- Skins -->
+
+            <div id="skins"
+                 class="shop-content active">
+
+                <div class="shop-item">
+
+                    <div class="skin-preview black">
+                        🧍
+                    </div>
+
+                    <div>
+                        <b>Classic</b>
+                        <small>Bepul</small>
+                    </div>
+
+                    <button data-skin="classic"
+                            data-price="0">
+                        TANLASH
+                    </button>
+
+                </div>
+
+
+                <div class="shop-item">
+
+                    <div class="skin-preview red">
+                        🧍
+                    </div>
+
+                    <div>
+                        <b>🔥 Fire</b>
+                        <small>150 💰</small>
+                    </div>
+
+                    <button data-skin="fire"
+                            data-price="150">
+                        SOTIB OLISH
+                    </button>
+
+                </div>
+
+
+                <div class="shop-item">
+
+                    <div class="skin-preview blue">
+                        🧍
+                    </div>
+
+                    <div>
+                        <b>❄️ Ice</b>
+                        <small>250 💰</small>
+                    </div>
+
+                    <button data-skin="ice"
+                            data-price="250">
+                        SOTIB OLISH
+                    </button>
+
+                </div>
+
+
+                <div class="shop-item">
+
+                    <div class="skin-preview gold">
+                        🧍
+                    </div>
+
+                    <div>
+                        <b>👑 Gold</b>
+                        <small>500 💰</small>
+                    </div>
+
+                    <button data-skin="gold"
+                            data-price="500">
+                        SOTIB OLISH
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Zones -->
+
+            <div id="zones"
+                 class="shop-content">
+
+                <div class="shop-item">
+
+                    <div>
+                        🌲
+                        <b>O‘rmon</b>
+                        <small>Ochilgan</small>
+                    </div>
+
+                    <button
+                        data-zone="forest">
+                        O‘YNASH
+                    </button>
+
+                </div>
+
+
+                <div class="shop-item">
+
+                    <div>
+                        🪦
+                        <b>Zombi shahri</b>
+                        <small>300 💰</small>
+                    </div>
+
+                    <button
+                        data-zone="city"
+                        data-price="300">
+                        OCHISH
+                    </button>
+
+                </div>
+
+
+                <div class="shop-item">
+
+                    <div>
+                        🌋
+                        <b>Ajdarlar vodiysi</b>
+                        <small>700 💰</small>
+                    </div>
+
+                    <button
+                        data-zone="lava"
+                        data-price="700">
+                        OCHISH
+                    </button>
+
+                </div>
+
+
+                <div class="shop-item">
+
+                    <div>
+                        🌑
+                        <b>Qorong‘u dunyo</b>
+                        <small>1200 💰</small>
+                    </div>
+
+                    <button
+                        data-zone="dark"
+                        data-price="1200">
+                        OCHISH
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Items -->
+
+            <div id="items"
+                 class="shop-content">
+
+                <div class="shop-item">
+
+                    <div>
+                        🏹
+                        <b>Kuchli kamon</b>
+                        <small>+10 damage</small>
+                    </div>
+
+                    <button id="buyBow">
+                        200 💰
+                    </button>
+
+                </div>
+
+
+                <div class="shop-item">
+
+                    <div>
+                        ❤️
+                        <b>HP upgrade</b>
+                        <small>+25 max HP</small>
+                    </div>
+
+                    <button id="buyHp">
+                        250 💰
+                    </button>
+
+                </div>
+
+
+                <div class="shop-item">
+
+                    <div>
+                        ⚡
+                        <b>Tezkor o‘q</b>
+                        <small>O‘q tezligi +4</small>
+                    </div>
+
+                    <button id="buyArrow">
+                        300 💰
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Game Over -->
+
+    <div id="gameOver">
+
+        <h1>💀 MAG‘LUB BO‘LDINGIZ</h1>
+
+        <p>
+            Qahramon qayta tirilishi mumkin.
+        </p>
+
+        <button id="restartBtn">
+            🔄 QAYTA BOSHLASH
+        </button>
+
+    </div>
+
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
